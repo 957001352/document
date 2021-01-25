@@ -193,18 +193,44 @@
 三、Spring Cloud 面试题
 
 1、什么是Spring Cloud？
+	SpringCloud是一个微服务框架,它提供的全套的分布式系统解决方案,对微服务基础框架Netflix的多个开源组件进行了封装,同时又实现了和云端平台以及和SpringBoot开发框架的集成,为微服务架构开发涉及的配置管理,服务治理,熔断机制、智能路由,微代理,控制总线,一次性token,全局一致性锁,leader选举,分布式session,集群状态管理等操作提供了一种简单的开发方式为开发者提供了快速构建分布式系统的工具
 
 2、使用Spring Cloud有什么优势？
-
+	大大降低了微服务项目部署的复杂性,提高了项目性能,解决了分布式系统中的冗余问题,负载均衡、服务发现、与分布式系统相关的复杂性。
+	
 3、服务注册和发现是什么意思？Spring Cloud如何实现？
+	
+	当我们开始一个项目的时候,我们通常需要对属性文件中进行所有的配置(yml文件配置)。随着越来越多的服务开发和部署,添加和修改这些属性变得更加复杂。有些服务可能会有所下降,而某些位置可能会发生变化。手动更改属性会产生问题。
+	服务注册中心 服务注册和服务发现可以在这种情况下提供帮助,由于所有服务都在服务注册中心服务器上注册并通过调用服务注册中心服务器完成查找,因此无需处理服务地点的任何更改和处理。
 
 4、负载平衡的意义什么？
 
+	在计算机中,负载平衡可以改善跨计算机,计算机集群,网络链接,中央处理单元或磁盘驱动器等多种计算资源的工作负载分布。负载平衡旨在优化资源使用,最大化吞吐量,最小化响应时间并避免任何单一资源的过载。使用多个组件进行负载平衡而不是单个组件可能会用过冗余来提高可靠性和可用性。负载平衡通常涉及专用软件或硬件,例如多层交换机或域名系统服务器进程。
+
 5、什么是Hystrix？它如何实现容错？
+
+	Hystrix是对雪崩效应的一种微服务链路的保护机制
+	
+	雪崩效应：多个微服务之间调用的时候,有一个微服务出现问题,或者长时间未响应,对调用服务的占用越来越多的系统资源,造成雪崩。
+	
+	Hystrix的功能：服务降级、服务熔断、服务限流、实时监控。
+	
+	Hystrix是一个延迟和容错库,用于隔离访问远程系统、服务或者第三方库,防止级联失败,从而提升系统的可用性与容错性。
+	
+	包裹请求、跳闸机制、资源隔离、监控、回退机制、自我修复
 
 6、什么是Hystrix断路器？我们需要它吗？
 
+	在一个分布式系统里,许多依赖不可避免的会调用失败,比如超时、异常等。如果没有采用任何措施的话会导致雪崩效应。
+	如何能够保证在一个依赖出问题的情况下,不会导致整体服务失败,这个就是Hystrix需要做的事情。Hystrix提供了熔断、隔离、Fallback、cache、监控等功能,能够在一个或多个依赖同时出现问题时保证系统依然可用。
+
 7、什么是Netflix Feign？它的优点是什么？
+
+	Feign使编写java http客户端更容易
+	Feign是一个Java到HTTP客户端绑定器	基于注解驱动,支持JAXRS-2.0、springmvc注解系列、自带注解@RequestLine等等。
+	支持http客户端扩展
+	
+	优点:可以与多种HTTP客户端集成、spring已经完全集成feign、极大的简化了了HTTP请求代码量、与ribbon负载均衡器、hystrix熔断器无缝集成。
 
 8、什么是Spring Cloud Bus？我们需要它吗？
 
@@ -214,23 +240,48 @@
 
 1、什么是 Spring Boot？
 
+	springboot就是spring开源框架下的子项目,是spring的一站式解决方案,主要简化了spring的使用难度、降低了对配置的要求,使得开发人员能够更容易的上手
+
 2、Spring Boot 有哪些优点？
 
+	简化了spring配置文件
+	没有代码和XML文件的生成
+	内置Tomcat
+	能够独立运行
+	简化监控
+
 3、什么是 JavaConfig？
+	JavaConfig是spring社区的产品,它提供了配置SpringIOC容器的纯Java方法。因此它有助于避免使用XML配置。使用JavaConfig的优点在于：
+	面向对象的配置
+	减少或者消除XML配置
+	类型安全和重构友好
 
 4、如何重新加载 Spring Boot 上的更改，而无需重新启动服务器？
 
+	使用DevTools
+
 5、Spring Boot 中的监视器是什么？
+	SpringbootActuator是Spring启动框架中的重要功能之一,Springboot监视器可帮助你访问生产环境中正在运行的应用程序的当前状态。有几个指标必须在生产环境中进行检查和监控。即使一些外部应用程序可能正在使用这些服务来向有关人员处罚警报消息。监视器模块公开了一组可直接作为HTTPURL访问的REST端点来检查状态
 
 6、如何在 Spring Boot 中禁用 Actuator 端点安全性？
 
+	management.security.enabled = false
+
 7、如何在自定义端口上运行 Spring Boot 应用程序？
+
+	在application.properties文件中加入server.port=8080
 
 8、什么是 YAML？
 
+	是一种数据描述语言,语法比XML简单很多
+
 9、如何实现 Spring Boot 应用程序的安全性？
 
+	spring-boot-starter-security、必须添加安全配置。配置类必须扩展WebSecurityConfigurerAdapter并覆盖其方法
+
 10、如何集成 Spring Boot 和 ActiveMQ？
+
+	spring-boot-starter-activemq 
 
 11、如何使用 Spring Boot 实现分页和排序？
 
@@ -244,17 +295,29 @@
 
 16、如何使用 Spring Boot 实现异常处理？
 
+	@ControllerAdvice + @ExceptionHandler
+
 17、您使用了哪些 starter maven 依赖项？
 
 18、什么是 CSRF 攻击？
 
 19、什么是 WebSockets？
 
+	Websocket是一种计算机通信协议,通过单个TCP连接提供全双工通信信道
+	Websocket是双向的,使用Websocket客户端或服务器可以发起消息发送
+	Websocket是全双工的,客户端和服务器是相互独立的	单个TCP连接,初始连接使用的HTTP,然后将此链接升级到基于套接字的连接。然后这个单一连接用于所有未来的通信
+	Light,与http相比,Websocket的消息数据交换要轻的多
+
 20、什么是 AOP？
+	AOP是Spring提供的关键特性之一,AOP即面向切面编程,是OOP编程的有效补充。在运行时,动态的将代码切入到类的指定方法、指定位置上的编程思想就是面向切面的编程
 
 21、什么是 Apache Kafka？
+	ApacheKafka是一个分布式数据流处理平台,可以实时发布、订阅、存储和处理数据流。
 
 22、我们如何监视所有 Spring Boot 微服务？
+
+	Springboot提供了监视器,
+	在 Spring Boot Actuator 之上，它提供了一个 Web UI，使我们能够可视化多个应用程序的度量。
 
 (文末附面试答案)
 五、Dubbo 面试题
@@ -305,16 +368,26 @@
 六、Redis 面试题
 
 1、什么是 Redis?
+	Redis是一个开源的、使用C语言编写的、支持网络交互的、可基于内存也可持久化的Key-Value数据库
 
 2、Redis 的数据类型？
 
+	String、List、Hash、Set、有序集合
+
 3、使用 Redis 有哪些好处？
+	响应快速
+	支持6种数据类型
+	操作都是原子的
+	MultiUtility工具
 
 4、Redis 相比 Memcached 有哪些优势？
+
+	Redis在存储小数据时比Memcached性能更高
 
 5、Memcache 与 Redis 的区别都有哪些？
 
 6、Redis 是单进程单线程的？
+	Redis是单线程的模式,他是利用队列技术将并发访问改为串行访问,消除传统的传统数据库的串行操作开销
 
 7、一个字符串类型的值能存储最大容量是多少？
 
